@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>名字</th>
+        <th>男百分比</th>
+        <th>女百分比</th>
+        <th>简介</th>
+        <th>名字五行</th>
+        <th>三才配置</th>
+        <th>天格</th>
+        <th>地格</th>
+        <th>人格</th>
+        <th>总格</th>
+        <th>外格</th>
+        <th>天格</th>
+        <th>人格</th>
+        <th>地格</th>
+        <th>外格</th>
+        <th>总格</th>
+        <th>诗句</th>
+        <th>姓氏</th>
+    </tr>
+    {% for i in sexual %}
+    <tr>
+        <td>{{ i.name }}</td>
+        <td>{{ i.man }}</td>
+        <td>{{ i.girl }}</td>
+        <td>{{ i.details }}</td>
+        <td>{{ i.five_lines }}</td>
+        <td>{{ i.three_talents }}</td>
+        <td>{{ i.five_cases_tian }}</td>
+        <td>{{ i.five_cases_ren }}</td>
+        <td>{{ i.five_cases_di }}</td>
+        <td>{{ i.five_cases_zong }}</td>
+        <td>{{ i.five_cases_wai }}</td>
+        <td>{{ i.five_grid_analysis_tian }}</td>
+        <td>{{ i.five_grid_analysis_ren }}</td>
+        <td>{{ i.five_grid_analysis_di }}</td>
+        <td>{{ i.five_grid_analysis_wai }}</td>
+        <td>{{ i.five_grid_analysis_zong }}</td>
+        <td>{{ i.verse }}</td>
+        <td>{{ i.sexual.sexual }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</br>
+
+{% if sexual.has_previous %}
+   <a href="{% url 'api:complete' %}?page={{ sexual.previous_page_number }}&sexual_id={{ sexual_id }}">上一页</a>
+{% endif %}
+
+   <a href="{% url 'api:complete' %}?sexual_id={{ sexual_id }}">第一页</a>
+
+{% for i in sexual.paginator.page_range %}
+   <a href="{% url 'api:complete' %}?page={{ i }}&sexual_id={{ sexual_id }}">{{ i }}</a>
+{% endfor %}
+
+   <a href="{% url 'api:complete' %}?page={{ sexual.paginator.num_pages }}&sexual_id={{ sexual_id }}">最后一页</a>
+
+{% if sexual.has_next %}
+   <a href="{% url 'api:complete' %}?page={{ sexual.next_page_number }}&sexual_id={{ sexual_id }}">下一页</a>
+{% endif %}
+
+</body>
+</html>

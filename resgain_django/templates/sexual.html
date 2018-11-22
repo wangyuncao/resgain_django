@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for i in sexual %}
+    <a href="{% url 'api:complete' %}?sexual_id={{ i.id }}">{{ i.sexual }}</a>
+{% endfor %}
+
+</br>
+{% if sexual.has_previous %}
+   <a href="{% url 'api:resgain' %}?page={{ sexual.previous_page_number }}">上一页</a>
+{% endif %}
+
+   <a href="{% url 'api:resgain' %}">第一页</a>
+
+{% for i in sexual.paginator.page_range %}
+   <a href="{% url 'api:resgain' %}?page={{ i }}">{{ i }}</a>
+{% endfor %}
+
+   <a href="{% url 'api:resgain' %}?page={{ sexual.paginator.num_pages }}">最后一页</a>
+
+{% if sexual.has_next %}
+   <a href="{% url 'api:resgain' %}?page={{ sexual.next_page_number }}">下一页</a>
+{% endif %}
+
+</body>
+</html>
